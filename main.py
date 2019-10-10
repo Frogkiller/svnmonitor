@@ -70,7 +70,7 @@ def create_file_tree(where):
     return tree
 
 
-class Engine():
+class Engine:
     def __init__(self, config):
         self.config = config
 
