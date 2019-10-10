@@ -125,7 +125,6 @@ class Engine():
         if val is not '':
             self.fill_files_view(self.data[int(val)]['files'])
 
-
     def start(self):
         self.top.mainloop()
 
@@ -137,8 +136,12 @@ class Engine():
 
 def main():
     config = configparser.ConfigParser()
-    #todo: add config.ini creation when it's not present.
-    config.read(configfile_name)
+    if not os.path.exists(configfile_name):
+        config['defaults'] = {'svn': '', 'username': ''}
+        with open(configfile_name, 'w') as configfile:
+            config.write(configfile)
+    else:
+        config.read(configfile_name)
     eng = Engine(config)
     eng.start()
 
